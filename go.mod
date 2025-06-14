@@ -1,6 +1,8 @@
 module github.com/krajcik/go-jwt
 
-go 1.24.2
+go 1.23.0
+
+toolchain go1.24.2
 
 require (
 	github.com/cloudwego/base64x v0.1.5
@@ -10,7 +12,6 @@ require (
 
 require (
 	github.com/bytedance/sonic/loader v0.2.4 // indirect
-	github.com/cloudwego/iasm v0.2.0 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/klauspost/cpuid/v2 v2.2.10 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect

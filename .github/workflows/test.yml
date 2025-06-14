@@ -1,0 +1,74 @@
+name: Test and Coverage
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    container: golang:1.24-alpine
+    
+    steps:
+    - name: Install git and build tools
+      run: apk add --no-cache git build-base
+      
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Cache Go modules
+      uses: actions/cache@v3
+      with:
+        path: /go/pkg/mod
+        key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+        restore-keys: |
+          ${{ runner.os }}-go-
+
+    - name: Download dependencies
+      run: go mod download
+
+    - name: Run tests with coverage
+      run: |
+        go test -race -covermode=atomic -coverprofile=coverage.out ./...
+        go tool cover -func=coverage.out
+
+    - name: Upload coverage reports to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./coverage.out
+        flags: unittests
+        name: codecov-umbrella
+        fail_ci_if_error: false
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    container: golangci/golangci-lint:latest-alpine
+    
+    steps:
+    - name: Install git
+      run: apk add --no-cache git
+      
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Run golangci-lint
+      run: golangci-lint run --timeout=5m
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    container: golang:1.24-alpine
+    
+    steps:
+    - name: Install git and build tools
+      run: apk add --no-cache git build-base
+      
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Build
+      run: go build ./...

@@ -4,6 +4,9 @@ A high-performance JWT (JSON Web Token) implementation for Go with support for *
 
 [![Go Reference](https://pkg.go.dev/badge/github.com/krajcik/go-jwt.svg)](https://pkg.go.dev/github.com/krajcik/go-jwt)
 [![Go Report Card](https://goreportcard.com/badge/github.com/krajcik/go-jwt)](https://goreportcard.com/report/github.com/krajcik/go-jwt)
+[![codecov](https://codecov.io/gh/krajcik/go-jwt/branch/main/graph/badge.svg)](https://codecov.io/gh/krajcik/go-jwt)
+[![Go Version](https://img.shields.io/badge/Go-1.23%2B-blue.svg)](https://golang.org/dl/)
+[![GitHub Actions](https://github.com/krajcik/go-jwt/workflows/Test%20and%20Coverage/badge.svg)](https://github.com/krajcik/go-jwt/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## 🎯 Architecture Overview
